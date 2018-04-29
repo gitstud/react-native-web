@@ -23,7 +23,7 @@ const babelLoaderConfiguration = {
     path.resolve(rootDirectory, 'node_modules/react-native-drawer-layout'),
     path.resolve(rootDirectory, 'node_modules/react-native-dismiss-keyboard'),
     path.resolve(rootDirectory, 'node_modules/react-native-safe-area-view'),
-    path.resolve(rootDirectory, 'node_modules/react-native-tab-view')
+    path.resolve(rootDirectory, 'node_modules/react-native-tab-view'),
   ],
   use: {
     loader: 'babel-loader',
