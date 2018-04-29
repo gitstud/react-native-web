@@ -9,13 +9,13 @@ export default class Splash extends Component {
   componentDidMount() {
     if (window.location) { window.location.hash = 'welcome' };
   }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={{width: '100%', height: '100%'}}>
-        <View style={{width: '100%', height: '100%'}}>
-          <ImageBackground source={require('../static/splashImage.jpeg')} style={{width: '100%', height: '100%'}}>
-            <View>
+          <ImageBackground source={require('../static/splashImage.jpeg')} style={styles.container}>
+            <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={[styles.buttonCenter]}
                 onPress={() => {
@@ -27,28 +27,40 @@ export default class Splash extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-            <View>
+            <View style={styles.buttonContainer}>
               <TouchableOpacity style={[styles.buttonCenter]} onPress={() => navigate('SignupOrganizer')}>
                 <View style={styles.organizer}>
                   <Text style={styles.whiteText}>I'm a game organizer</Text>
                 </View>
               </TouchableOpacity>
             </View>
-            <View>
+            <View style={styles.buttonContainer}>
               <TouchableOpacity style={[styles.buttonCenter]} onPress={() => navigate('Login')}>
-                <View style={[styles.organizer, { backgroundColor: 'transparent' }]}>
+                <View style={[styles.organizer, { backgroundColor: 'black' }]}>
                   <Text style={styles.whiteText}>Login</Text>
                 </View>
               </TouchableOpacity>
             </View>
           </ImageBackground>
-        </View>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  buttonContainer: {
+    marginBottom: '5%',
+    width: '90%',
+    height: '5%'
+  },
   buttonCenter: {
     display: 'flex',
     flexDirection: 'row',

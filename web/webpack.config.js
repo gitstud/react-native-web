@@ -24,6 +24,7 @@ const babelLoaderConfiguration = {
     path.resolve(rootDirectory, 'node_modules/react-native-dismiss-keyboard'),
     path.resolve(rootDirectory, 'node_modules/react-native-safe-area-view'),
     path.resolve(rootDirectory, 'node_modules/react-native-tab-view'),
+    path.resolve(rootDirectory, 'node_modules/react-native/Libraries/Renderer/shims/ReactNativePropRegistry'),
   ],
   use: {
     loader: 'babel-loader',
