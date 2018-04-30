@@ -13,7 +13,6 @@ export default class Splash extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={{width: '100%', height: '100%'}}>
           <ImageBackground source={require('../static/splashImage.jpeg')} style={styles.container}>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
@@ -23,7 +22,7 @@ export default class Splash extends Component {
                   if (window.location) { window.location.hash = 'dashboard' };
                 }}>
                 <View style={styles.golfer}>
-                  <Text style={styles.whiteText}>I'm a golfer</Text>
+                  <Text style={styles.whiteText}>Hello World!</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -42,15 +41,15 @@ export default class Splash extends Component {
               </TouchableOpacity>
             </View>
           </ImageBackground>
-      </View>
+
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
     width: '100%',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

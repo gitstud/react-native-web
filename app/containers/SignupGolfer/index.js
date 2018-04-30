@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Col, Row } from '../../components/easy-grid';
-import { View, Text, TouchableOpacity, Switch, ScrollView, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, ScrollView, Image, StyleSheet, Button, TextInput, Picker } from 'react-native';
 import Skills from './skills';
 // import { Form, Item, Label, Input, Button } from 'native-base';
 // import { Dropdown } from 'react-native-material-dropdown';
@@ -139,14 +139,14 @@ class SignupGolfer extends Component {
         <Text style={styles.title}>{`WHERE DO\nYOU PLAY ?`}</Text>
       </Row>,
       <Row key="location">
-        <Item stackedLabel style={{width: '100%'}}>
-          <Label>YOUR COURSE</Label>
-          <Input
+        <View stackedLabel style={{width: '100%'}}>
+          <Text>YOUR COURSE</Text>
+          <TextInput
             placeholder="Your Course Name"
             onChangeText={(text) => this._handleLocationChange(text)}
             value={this.props.golfer.location}
           />
-        </Item>
+      </View>
       </Row>,
       <Row size={4} key="space"/>,
     ];
@@ -212,20 +212,22 @@ class SignupGolfer extends Component {
     let mapDays = Array.apply(null, {length: days}).map(Number.call, Number);
     const leadSpaces = Array.apply(null, {length: firstDay});
     mapDays = leadSpaces.concat(mapDays);
-
+    console.log(Object.values(MONTHS));
     return [
       <Row size={1} key="subtitle">
         <Text style={{fontWeight: 'bold', color: '#EA3350'}}>YOUR FULL SCHEDULE</Text>
       </Row>,
       <Row size={2} key="dropdown">
         <View style={{width: '100%'}}>
-          <Dropdown
-            style={{width: '100%'}}
-            label=""
-            data={MONTHS}
+          <Picker
+            style={{height: 60, width: 200}}
             value={month}
             onChangeText={(value) => this._handleMonthSelect(value)}
-          />
+          >
+            {MONTHS.map((m, i) => (
+              <Picker.Item key={m.value} label={m.value} value={m.value} />
+            ))}
+        </Picker>
         </View>
       </Row>,
       <Row key={month} size={5}>
@@ -374,55 +376,43 @@ class SignupGolfer extends Component {
         </View>
       </Row>,
       <Row key="nameInput" size={1}>
-        <Item stackedLabel style={{width: '100%'}}>
-          <Input
+        <View stackedLabel style={{width: '100%'}}>
+          <TextInput
             placeholder="Name"
             onChangeText={(text) => this.props.updateName(text)}
             value={this.props.golfer.golferName}
           />
-        </Item>
+        </View>
       </Row>,
       <Row key="emailInput" size={1}>
-        <Item stackedLabel style={{width: '100%'}}>
-          <Input
+        <View stackedLabel style={{width: '100%'}}>
+          <TextInput
             placeholder="Email"
             onChangeText={(text) => this.props.updateEmail(text)}
             value={this.props.golfer.email}
           />
-        </Item>
+      </View>
       </Row>,
       <Row key="passwordInput" size={1}>
-        <Item stackedLabel style={{width: '100%'}}>
-          <Input
+        <View stackedLabel style={{width: '100%'}}>
+          <TextInput
             placeholder="Password"
             onChangeText={(text) => this.props.updatePassword(text)}
             value={this.props.golfer.password}
           />
-        </Item>
+      </View>
       </Row>,
       <Row key="infoInput" size={1}>
         <Col>
-          <Item stackedLabel style={{width: '80%'}}>
-            <Input
+          <View stackedLabel style={{width: '80%'}}>
+            <TextInput
               placeholder="Age"
               onChangeText={(text) => this.props.updateAge(text)}
               value={this.props.golfer.age}
             />
-          </Item>
+        </View>
         </Col>
         <Col>
-          <View style={{width: '100%', height: '100%'}}>
-            <Dropdown
-              style={{width: '100%', paddingBottom: 15}}
-              label={''}
-              data={[{value: 'male'}, {value: 'female'}]}
-              value={gender ? gender : 'Gender'}
-              onChangeText={(value) => {
-                this.props.updateGender(value);
-                this.setState({ gender: value });
-              }}
-            />
-          </View>
         </Col>
       </Row>,
       <Row size={1} key="space"/>,
