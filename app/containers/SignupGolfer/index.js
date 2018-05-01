@@ -139,7 +139,7 @@ class SignupGolfer extends Component {
         <Text style={styles.title}>{`WHERE DO\nYOU PLAY ?`}</Text>
       </Row>,
       <Row key="location">
-        <View stackedLabel style={{width: '100%'}}>
+        <View style={{width: '100%'}}>
           <Text>YOUR COURSE</Text>
           <TextInput
             placeholder="Your Course Name"
@@ -212,7 +212,7 @@ class SignupGolfer extends Component {
     let mapDays = Array.apply(null, {length: days}).map(Number.call, Number);
     const leadSpaces = Array.apply(null, {length: firstDay});
     mapDays = leadSpaces.concat(mapDays);
-    console.log(Object.values(MONTHS));
+    console.log(weeklySchedule, selectDay);
     return [
       <Row size={1} key="subtitle">
         <Text style={{fontWeight: 'bold', color: '#EA3350'}}>YOUR FULL SCHEDULE</Text>
@@ -222,7 +222,7 @@ class SignupGolfer extends Component {
           <Picker
             style={{height: 60, width: 200}}
             value={month}
-            onChangeText={(value) => this._handleMonthSelect(value)}
+            onValueChange={(value) => this._handleMonthSelect(value)}
           >
             {MONTHS.map((m, i) => (
               <Picker.Item key={m.value} label={m.value} value={m.value} />
@@ -246,21 +246,26 @@ class SignupGolfer extends Component {
 
               return (
                 <Row key={-v}>
-                  <TouchableOpacity
-                    style={[
-                      styles.calDay,
-                      Number(dd) === selectDate ? { backgroundColor: '#E83350'} :
-                      Object.keys(weeklySchedule[day]).length > 0 ? { backgroundColor: '#DEDEE0' } :
-                      {},
-                      {
-                        borderWidth: 1,
-                        borderColor: '#F6F6F6',
-                      },
-                    ]}
-                    onPress={() => this._handleDaySelect(dd)}
-                  >
-                    <Text>{mapDays[(i * 7) + dayIndex] !== undefined && dd}</Text>
-                  </TouchableOpacity>
+                  {mapDays[(i * 7) + dayIndex] !== undefined && (
+                    <TouchableOpacity
+                      style={[
+                        styles.calDay,
+                        Number(dd) === selectDate ? { backgroundColor: '#E83350'} :
+                        Object.keys(weeklySchedule[day]).length > 0 ? { backgroundColor: '#DEDEE0' } :
+                        {},
+                        {
+                          borderWidth: 1,
+                          borderColor: '#F6F6F6',
+                        },
+                      ]}
+                      onPress={() => this._handleDaySelect(dd)}
+                    >
+                      <Text>{mapDays[(i * 7) + dayIndex] !== undefined && dd}</Text>
+                    </TouchableOpacity>
+                  )}
+                  {mapDays[(i * 7) + dayIndex] !== undefined && (
+                    <View style={styles.calDay}></View>
+                  )}
                 </Row>
               );
             })}
@@ -290,7 +295,7 @@ class SignupGolfer extends Component {
                       <View
                         style={{
                           width: '90%',
-                          height: '100%',
+                          height: 35,
                           borderBottomWidth: 1,
                           borderBottomColor: '#DEDEE0',
                           backgroundColor: weeklySchedule[selectDay][time] ? '#E83350' : 'transparent',
@@ -376,7 +381,7 @@ class SignupGolfer extends Component {
         </View>
       </Row>,
       <Row key="nameInput" size={1}>
-        <View stackedLabel style={{width: '100%'}}>
+        <View style={{width: '100%'}}>
           <TextInput
             placeholder="Name"
             onChangeText={(text) => this.props.updateName(text)}
@@ -385,7 +390,7 @@ class SignupGolfer extends Component {
         </View>
       </Row>,
       <Row key="emailInput" size={1}>
-        <View stackedLabel style={{width: '100%'}}>
+        <View style={{width: '100%'}}>
           <TextInput
             placeholder="Email"
             onChangeText={(text) => this.props.updateEmail(text)}
@@ -394,7 +399,7 @@ class SignupGolfer extends Component {
       </View>
       </Row>,
       <Row key="passwordInput" size={1}>
-        <View stackedLabel style={{width: '100%'}}>
+        <View style={{width: '100%'}}>
           <TextInput
             placeholder="Password"
             onChangeText={(text) => this.props.updatePassword(text)}
@@ -404,7 +409,7 @@ class SignupGolfer extends Component {
       </Row>,
       <Row key="infoInput" size={1}>
         <Col>
-          <View stackedLabel style={{width: '80%'}}>
+          <View style={{width: '80%'}}>
             <TextInput
               placeholder="Age"
               onChangeText={(text) => this.props.updateAge(text)}
